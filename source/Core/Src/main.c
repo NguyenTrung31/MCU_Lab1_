@@ -212,22 +212,28 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int counter = 0;
-  clearAllClock();
+  int second = 0;
+  int minute = 0;
+  int hour = 0;
   while (1)
   {
-	  if (counter >= 24) {
-	  	  counter = 0;
+	  clearAllClock();
+	  setNumberOnClock(hour);
+	  setNumberOnClock(minute/5);
+	  setNumberOnClock(second/5);
+	  if (second == 60){
+	  	  	minute++;
+	  	  	second = 0;
 	  }
-	  if (counter <= 11 ) {
-	  	  setNumberOnClock(counter);
-	  	  counter++;
+	  if (minute == 60){
+	  	  	hour ++;
+	  	  	minute = 0;
 	  }
-	   else {
-	  	  clearNumberOnClock(23 - counter);
-	  	  counter++;
+	  if (hour == 12){
+	  	  	hour = 0;
 	  }
-	  HAL_Delay(1000);
+	  second ++;
+	  HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
